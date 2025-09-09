@@ -17,6 +17,7 @@ use Syntax\SteamApi\Exceptions\ClassNotFoundException;
 use Syntax\SteamApi\Exceptions\InvalidApiKeyException;
 use Syntax\SteamApi\Exceptions\UnrecognizedId;
 use Syntax\SteamApi\Steam\App;
+use Syntax\SteamApi\Steam\Bundle;
 use Syntax\SteamApi\Steam\Group;
 use Syntax\SteamApi\Steam\Item;
 use Syntax\SteamApi\Steam\News;
@@ -32,6 +33,7 @@ use Syntax\SteamApi\Steam\User\Stats;
  * @method Stats      userStats($steamId)
  * @method App        app()
  * @method Package    package()
+ * @method Bundle     bundle()
  * @method Group      group()
  * @method Item       item()
  */

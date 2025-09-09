@@ -18,6 +18,8 @@ class BaseTester extends TestCase {
 
     protected int $packageId = 469; // The Orange Box
 
+    protected int $bundleId = 54413; // Cyberpunk
+
     protected int $itemAppId = 5021; // Mann Co. Supply Crate Key
 
     protected int $groupId   = 103582791429521412; // Valve
