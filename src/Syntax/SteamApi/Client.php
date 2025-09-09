@@ -20,7 +20,7 @@ use Syntax\SteamApi\Steam\App;
 use Syntax\SteamApi\Steam\Group;
 use Syntax\SteamApi\Steam\Item;
 use Syntax\SteamApi\Steam\News;
-use Syntax\Steamapi\Steam\Package;
+use Syntax\SteamApi\Steam\Package;
 use Syntax\SteamApi\Steam\Player;
 use Syntax\SteamApi\Steam\User;
 use Syntax\SteamApi\Steam\User\Stats;
