@@ -45,7 +45,7 @@ class Game extends BaseContainer
      *
      * @return null|string
      */
-    protected function checkIssetImage($app, string $field, string $value = null): ?string
+    protected function checkIssetImage($app, string $field, ?string $value = null): ?string
     {
         return isset($app->$field) ? $this->getImageForGame($app->appid, $app->$field) : $value;
     }

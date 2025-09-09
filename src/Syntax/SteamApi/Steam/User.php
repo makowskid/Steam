@@ -59,7 +59,7 @@ class User extends Client
      *
      * @return array
      */
-    public function GetPlayerSummaries(string $steamId = null): array
+    public function GetPlayerSummaries(?string $steamId = null): array
     {
         // Set up the api details
         $this->method  = __FUNCTION__;

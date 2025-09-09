@@ -25,7 +25,7 @@ trait SteamId
      * @return mixed
      * @throws UnrecognizedId
      */
-    public function convertId(int|string $id, string $format = null)
+    public function convertId(int|string $id, ?string $format = null)
     {
         $this->convertToAll($id);
 
