@@ -57,15 +57,27 @@ class App extends Client
     public function GetAppList()
     {
         // Set up the api details
-        $this->url       = 'http://api.steampowered.com/';
-        $this->interface = 'ISteamApps';
+        $this->url       = 'https://api.steampowered.com/';
+        $this->interface = 'IStoreService';
         $this->method    = __FUNCTION__;
-        $this->version   = 'v0001';
+        $this->version   = 'v1';
 
-        // Get the client
-        $client = $this->setUpClient();
+        $apps      = [];
+        $arguments = [
+            'max_results'      => 50000,
+            'include_dlc'      => 'true',
+            'include_software' => 'true',
+            'include_videos'   => 'true',
+            'include_hardware' => 'true',
+        ];
 
-        return $client->applist->apps->app;
+        do {
+            $response = $this->setUpClient($arguments)->response;
+            $apps     = array_merge($apps, $response->apps ?? []);
+            $arguments['last_appid'] = $response->last_appid ?? null;
+        } while (! empty($response->have_more_results) && $arguments['last_appid']);
+
+        return $apps;
     }
 
     protected function convertToObjects($apps): Collection
