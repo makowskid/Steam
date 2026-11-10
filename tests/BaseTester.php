@@ -3,6 +3,7 @@
 use Orchestra\Testbench\TestCase;
 use Syntax\SteamApi\Client;
 use Dotenv\Dotenv;
+use PHPUnit\Framework\Attributes\Test;
 
 class BaseTester extends TestCase {
 
@@ -43,10 +44,17 @@ class BaseTester extends TestCase {
         $this->steamClient = new Client();
     }
 
-    /** @test */
+    #[Test]
     public function empty_test()
     {
         $this->assertTrue(true);
+    }
+
+    protected function requiresApiKey(): void
+    {
+        if (! (fn () => $this->apiKey)->call($this->steamClient)) {
+            $this->markTestSkipped('Steam API key not set.');
+        }
     }
 
     protected function assertObjectHasProperties($attributes, $object): void

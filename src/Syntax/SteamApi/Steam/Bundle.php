@@ -30,7 +30,7 @@ class Bundle extends Client
         // Set up the arguments
         $arguments = [
             'bundleids'  => $id,
-            'cc'         => $cc ? strtoupper($cc) : "-",
+            'cc'         => $cc ? strtoupper($cc) : "US",
             'l'          => $language ?: "-",
         ];
 
