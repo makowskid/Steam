@@ -1,11 +1,14 @@
 <?php
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
+
 require_once('BaseTester.php');
 
-/** @group Bundle */
+#[Group('Bundle')]
 class BundleTest extends BaseTester
 {
-    /** @test */
+    #[Test]
     public function it_gets_details_for_a_bundle_by_id()
     {
         $bundles = $this->steamClient->bundle()->bundleDetails($this->bundleId);

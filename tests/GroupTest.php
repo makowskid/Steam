@@ -1,11 +1,14 @@
 <?php
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
+
 require_once('BaseTester.php');
 
-/** @group Group */
+#[Group('Group')]
 class GroupTest extends BaseTester {
 
-    /** @test */
+    #[Test]
     public function it_gets_a_summary_of_a_group_by_id()
     {
         $group = $this->steamClient->group()->GetGroupSummary($this->groupId);
@@ -14,7 +17,7 @@ class GroupTest extends BaseTester {
         $this->checkClasses($group);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_a_summary_of_a_group_by_name()
     {
         $group = $this->steamClient->group()->GetGroupSummary($this->groupName);

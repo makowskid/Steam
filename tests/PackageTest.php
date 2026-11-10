@@ -1,11 +1,14 @@
 <?php
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
+
 require_once('BaseTester.php');
 
-/** @group Package */
+#[Group('Package')]
 class PackageTest extends BaseTester
 {
-    /** @test */
+    #[Test]
     public function it_gets_details_for_an_package_by_id()
     {
         $details = $this->steamClient->package()->packageDetails($this->packageId);

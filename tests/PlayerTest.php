@@ -1,21 +1,28 @@
 <?php
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
+
 require_once('BaseTester.php');
 
-/** @group Player */
+#[Group('Player')]
 class PlayerTest extends BaseTester {
 
-    /** @test */
+    #[Test]
     public function it_gets_the_steam_level_by_user_id()
     {
+        $this->requiresApiKey();
+
         $steamLevel = $this->steamClient->player($this->id64)->GetSteamLevel();
 
         $this->assertIsInt($steamLevel);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_the_player_details_by_user_id()
     {
+        $this->requiresApiKey();
+
         $details = $this->steamClient->player($this->id64)->GetPlayerLevelDetails();
 
         $this->assertInstanceOf(\Syntax\SteamApi\Containers\Player\Level::class, $details);
@@ -27,9 +34,11 @@ class PlayerTest extends BaseTester {
         $this->assertObjectHasProperties($attributes, $details);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_the_badges_by_user_id()
     {
+        $this->requiresApiKey();
+
         $badges = $this->steamClient->player($this->id64)->GetBadges();
 
         $attributes = ['badges', 'player_xp', 'player_level', 'player_xp_needed_to_level_up', 'player_xp_needed_current_level'];
@@ -39,9 +48,11 @@ class PlayerTest extends BaseTester {
         $this->assertObjectHasProperties($attributes, $badges->badges[0]);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_the_badge_progress_by_user_id()
     {
+        $this->requiresApiKey();
+
         $this->expectApiCallFailedException('Api call failed to complete due to an empty response');
 
         $progress = $this->steamClient->player($this->id64)->GetCommunityBadgeProgress();
@@ -52,9 +63,11 @@ class PlayerTest extends BaseTester {
         $this->assertObjectHasProperties($attributes, $progress->quests[0]);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_the_owned_games_by_user_id()
     {
+        $this->requiresApiKey();
+
         $games = $this->steamClient->player($this->id64)->GetOwnedGames();
 
         $this->assertInstanceOf(\Illuminate\Support\Collection::class, $games);
@@ -67,9 +80,11 @@ class PlayerTest extends BaseTester {
         $this->assertObjectHasProperties($attributes, $games->first());
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_the_owned_games_by_user_id_without_app_details()
     {
+        $this->requiresApiKey();
+
         $games = $this->steamClient->player($this->id64)->GetOwnedGames(false);
 
         $this->assertInstanceOf(\Illuminate\Support\Collection::class, $games);
@@ -86,9 +101,11 @@ class PlayerTest extends BaseTester {
         $this->assertNull($games->first()->logo);
     }
 
-    /** @test */
+    #[Test]
     public function it_filters_the_owned_games_by_user_id()
     {
+        $this->requiresApiKey();
+
         $games = $this->steamClient->player($this->id64)->GetOwnedGames(true, false, 400);
 
         $this->assertInstanceOf(\Illuminate\Support\Collection::class, $games);
@@ -102,9 +119,11 @@ class PlayerTest extends BaseTester {
         $this->assertObjectHasProperties($attributes, $games->first());
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_recently_played_games_by_user_id()
     {
+        $this->requiresApiKey();
+
         $games = $this->steamClient->player($this->id64)->GetRecentlyPlayedGames();
 
         $this->assertInstanceOf(\Illuminate\Support\Collection::class, $games);
@@ -117,9 +136,11 @@ class PlayerTest extends BaseTester {
         $this->assertObjectHasProperties($attributes, $games->first());
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_a_single_recently_played_game_by_user_id()
     {
+        $this->requiresApiKey();
+
         $games = $this->steamClient->player($this->id64)->GetRecentlyPlayedGames(1);
 
         $this->assertInstanceOf(\Illuminate\Support\Collection::class, $games);
@@ -133,9 +154,11 @@ class PlayerTest extends BaseTester {
         $this->assertObjectHasProperties($attributes, $games->first());
     }
 
-    /** @test */
+    #[Test]
     public function it_checks_if_playing_a_shared_game_by_user_and_app_id()
     {
+        $this->requiresApiKey();
+
         $this->expectEmptyResponseException();
 
         $playingSharedGame = $this->steamClient->player($this->id64)->IsPlayingSharedGame($this->appId);

@@ -1,11 +1,14 @@
 <?php
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
+
 require_once('BaseTester.php');
 
-/** @group News */
+#[Group('News')]
 class NewsTest extends BaseTester {
 
-    /** @test */
+    #[Test]
     public function it_gets_news_by_app_id()
     {
         $newsArticle = $this->steamClient->news()->GetNewsForApp($this->appId, 1, 20);
@@ -23,7 +26,7 @@ class NewsTest extends BaseTester {
         $this->assertTrue(strlen(strip_tags((string) $newsArticle->newsitems[0]->contents)) <= 23);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_more_than_1_news_article_by_app_id()
     {
         $newsArticle = $this->steamClient->news()->GetNewsForApp($this->appId);
@@ -34,12 +37,12 @@ class NewsTest extends BaseTester {
     }
 
     /**
-     * @test
      *
-     * @depends it_gets_more_than_1_news_article_by_app_id
      *
      * @param $defaultNewsCall
      */
+    #[\PHPUnit\Framework\Attributes\Depends('it_gets_more_than_1_news_article_by_app_id')]
+    #[Test]
     public function it_has_full_news_article_by_app_id($defaultNewsCall)
     {
         foreach ($defaultNewsCall->newsitems as $newsItem) {
